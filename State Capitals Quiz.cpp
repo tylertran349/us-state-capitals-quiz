@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <string>
 using namespace std;
 
 int main() {
@@ -54,14 +55,34 @@ int main() {
 	capitals.emplace("West Virginia", "Charleston");
 	capitals.emplace("Wisconsin", "Madison");
 	capitals.emplace("Wyoming", "Cheyenne");
-	string guess;
-	for(auto x : capitals) {
-		cout << "What is the capital of " << x.first << "? ";
-		getline(cin, guess);
-		if(guess == x.second) {
-			cout << "You are correct!" << endl;
-		} else {
-			cout << "Incorrect! The capital of " << x.first << " is: " << x.second << "." << endl;
+	string option, guess;
+	while(option != "capitals" || option != "states") {
+		cout << "Would you like to answer with capitals or states (enter \"capitals\" or \"states\")? ";
+		getline(cin, option);
+		for(int i = 0; i < option.length(); i++) {
+			option[i] = tolower(option[i]);
+		}
+		if(option == "capitals") {
+			for(auto x : capitals) {
+				cout << "What is the capital of " << x.first << "? ";
+				getline(cin, guess);
+				if(guess == x.second) {
+					cout << "You are correct!" << endl;
+				} else {
+					cout << "Incorrect! The capital of " << x.first << " is: " << x.second << endl;
+				}
+			}
+		} else if(option == "states") {
+			for(auto x : capitals) {
+				cout << "What state is " << x.second << " the capital of? ";
+				getline(cin, guess);
+				if(guess == x.first) {
+					cout << "You are correct!" << endl;
+				} else {
+					cout << "Incorrect! " << x.second << " is the capital of: " << x.first << endl;
+				}
+			}
 		}
 	}
+	return 0;
 }
